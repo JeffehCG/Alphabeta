@@ -6,12 +6,13 @@
     String erro = null ;
     try{
             if(request.getParameter("entrar")!=null){
-                    int cpf = Integer.parseInt(request.getParameter("cpf"));
+                    String cpf = request.getParameter("cpf");
                     String senha = request.getParameter("senha");
                     Aluno a = Aluno.PesquisarAlunoCpf(cpf);
                     if(a.getNome()!=null){
                         if(a.getSenha().equals(senha)){
-                 session.setAttribute("me.id",request.getParameter("cpf"));
+                 session.setAttribute("me.cpf",String.valueOf(a.getCpf()));
+                 session.setAttribute("me.nome",a.getNome());
                 response.sendRedirect("home.jsp");}}
                 }
     }catch(Exception e){

@@ -1,3 +1,4 @@
+<%@page import="java.math.BigInteger"%>
 <%@page import="com.database.web.Aluno"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,16 +8,16 @@
         if(request.getParameter("gravar")!=null){
         String nome = request.getParameter("nome") ;
         String sobrenome = request.getParameter("sobrenome");
-        int cpf = Integer.parseInt(request.getParameter("cpf"));
+        String cpf = request.getParameter("cpf");
         String rua = request.getParameter("rua");
         String bairro = request.getParameter("bairro");
         int numero = Integer.parseInt(request.getParameter("numero"));;
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("estado") ;
         int cep = Integer.parseInt(request.getParameter("cep"));;
-        int telefone = Integer.parseInt(request.getParameter("telefone"));;
+        String telefone = request.getParameter("telefone");;
         String nmresp = request.getParameter("nmresp");
-        int cfpresp = Integer.parseInt(request.getParameter("cpfresp"));;
+        String cfpresp = request.getParameter("cpfresp");;
         String senha = request.getParameter("senha");
     
             Aluno.inserirAluno(nome, sobrenome, cpf, rua, bairro, numero, cidade, estado, cep, telefone, nmresp, cfpresp, senha);
@@ -63,5 +64,6 @@
             <input type="text" name="senha"/><br>
             <input type="submit" name="gravar" value="Cadastrar"/>
         </form>
+        <a href="login.jsp">Voltar para o</a>
     </body>
 </html>
