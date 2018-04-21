@@ -108,8 +108,8 @@ public class Aluno {
     }
 
     //Metodo para alterar aluno
-    public static void AlterarAluno (String nome,String sobrenome,String cpf,String rua,String bairro, int numero, String cidade,String estado, int cep, String telefone, String nomeres, String cpfres,String senha)throws Exception{
-        String SQL = "UPDATE aluno SET nm_nome = ? , nm_sobrenome = ? , nm_endereco_rua = ? , nm_endereco_bairro = ? , nm_endereco_num = ? , nm_cidade = ? , nm_estado = ? , cd_cep = ? , cd_telefone = ? , nm_responsavel = ? , cd_cpf_responsavel = ? , cd_senha = ? WHERE cd_cpf = ? " ;
+    public static void AlterarAluno (String nome,String sobrenome,String cpf,String rua,String bairro, int numero, String cidade,String estado, int cep, String telefone, String nomeres, String cpfres)throws Exception{
+        String SQL = "UPDATE aluno SET nm_nome = ? , nm_sobrenome = ? , nm_endereco_rua = ? , nm_endereco_bairro = ? , nm_endereco_num = ? , nm_cidade = ? , nm_estado = ? , cd_cep = ? , cd_telefone = ? , nm_responsavel = ? , cd_cpf_responsavel = ? WHERE cd_cpf = ? " ;
         PreparedStatement s = DataBase.getConnection().prepareStatement(SQL);
                     s.setString(1,nome);
                     s.setString(2,sobrenome);
@@ -121,10 +121,11 @@ public class Aluno {
                     s.setInt(8,cep);
                     s.setString(9,telefone);
                     s.setString(10,nomeres);
-                    s.setString(11,cpfres);
-                    s.setString(12,senha);  
-                    s.setString(13,cpf);
-            
+                    s.setString(11,cpfres);  
+                    s.setString(12,cpf);
+                    s.execute();
+                    s.close();
+             
     }
     public Aluno(String nome, String sobreNome, String cpf, String rua, String bairro, int numero, String cidade, String estado, int cep, String telefone, String nomeResponsavel, String cpfresponsavel, String senha) {
         this.nome = nome;
