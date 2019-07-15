@@ -1,0 +1,159 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 9, 2018, 3:54:19 PM
+    Author     : rodrigo
+*/
+
+body{
+    background-image: url('../img/beta4.png') !important;
+    background-size: cover;
+}
+
+div.ui.main.segment.container{
+    height: auto !important;
+}
+
+.wordContainer{
+	border: 2px dotted black;
+	border-radius: 5px;
+	padding: 5px;
+	margin: auto;
+        margin-top: 20px;
+}
+
+.wordContainer img{
+	border-radius: 5px;
+}
+
+#result{
+/*	font-size: 24px;
+	float: right;
+	line-height: 1.5;*/
+}
+
+#ans{
+	/*float:left;*/
+}
+
+.wordObject{
+	  /* float: left; */
+	  cursor: pointer !important;
+          width: 78px;
+	  height: 35px;
+	  padding: 5px;
+	  /*padding-top: 40px;
+	  padding-bottom: 0;*/
+	  border: 2px solid #333;
+	  -moz-border-radius: 10px;
+	  -webkit-border-radius: 10px;
+	  border-radius: 10px;
+	  margin: 5px 0px 0px 10px;
+	  background: #fff;
+	  /* display: table-cells; */
+	  
+}
+
+.wordSlot{
+	  /* float: left; */
+	  width: 78px;
+	  height: 35px;
+	  padding: 5px;
+	  /*padding-top: 40px;
+	  padding-bottom: 0;*/
+	  border: 2px dotted #333;
+	  -moz-border-radius: 10px;
+	  -webkit-border-radius: 10px;
+	  border-radius: 10px;
+	  margin: 0px 5px 0px 5px;
+	  background: #fff;
+	  position: relative;
+	  top: 6px;
+	  /* display: table-cells; */
+	  
+}
+
+#content {
+  margin: 80px 120px;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  height: 500px;
+  
+}
+
+#result{
+/*	width: 400px;
+	min-height: 100px;
+	height:auto;
+	border: 1px solid #454545;
+	border-radius: 5px;*/
+	height: auto;
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+        text-align: center;
+        
+}
+
+#ans{
+	display: flex;
+        flex-wrap: wrap;
+        align-content: space-around;
+        
+        
+}
+
+.exeUnit{
+	
+	display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        margin: auto;
+        font-size: 28px;
+}
+
+.org{
+	
+	display: table-cell;
+	width: auto;
+}
+
+.keyWord{
+	display: inline-block;
+}
+
+.keyWord input[type = text]{
+	position: relative;
+	bottom: 5px;
+	width: 70px;
+}
+
+.inputFile{
+	border: 2px dotted red;
+	/* padding: 25px; */
+	/* margin: 25px; */
+	width: 70px;
+	height: 60px;
+	
+	position: relative;
+	top: 2px;
+	display: block;
+}
+
+#menu h4{
+	/* display: inline; */
+}
+
+input[type=file]{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}

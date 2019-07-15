@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class Aluno {
     private String nome ;
@@ -21,10 +21,12 @@ public class Aluno {
     private String nomeResponsavel;
     private String cpfresponsavel;
     private String senha;
+    private Date dtNasc ;
+    private String email;
     
     //Metodo para inserir aluno
-    public static void inserirAluno (String nome,String sobrenome,String cpf,String rua,String bairro, int numero, String cidade,String estado, int cep, String telefone, String nomeres,String cpfres,String senha) throws Exception{
-        String SQL = "INSERT INTO aluno VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public static void inserirAluno (String nome,String sobrenome,String cpf,String rua,String bairro, int numero, String cidade,String estado, int cep, String telefone, String nomeres,String cpfres,String senha,Date dtNasc,String email) throws Exception{
+        String SQL = "INSERT INTO aluno VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement s = DataBase.getConnection().prepareStatement(SQL);
         s.setString(1,nome);
         s.setString(2,sobrenome);
@@ -39,6 +41,8 @@ public class Aluno {
         s.setString(11,nomeres);
         s.setString(12,cpfres);
         s.setString(13,senha);
+        s.setDate(14, dtNasc);
+        s.setString(15, email);
         s.execute();
         s.close();
     }
@@ -59,9 +63,11 @@ public class Aluno {
                     ,rs.getString("nm_estado")
                     ,rs.getInt("cd_cep")
                     ,rs.getString("cd_telefone")
-                    ,rs.getString("nm_reponsavel")
+                    ,rs.getString("nm_responsavel")
                     ,rs.getString("cd_cpf_responsavel")
-                    ,rs.getString("cd_senha"));
+                    ,rs.getString("cd_senha")
+                    ,rs.getDate("dt_nascimento")
+                    ,rs.getString("nm_email"));
             list.add(al);
         }
         rs.close();
@@ -90,7 +96,9 @@ public class Aluno {
                     ,rs.getString("cd_telefone")
                     ,rs.getString("nm_responsavel")
                     ,rs.getString("cd_cpf_responsavel")
-                    ,rs.getString("cd_senha")   
+                    ,rs.getString("cd_senha")
+                    ,rs.getDate("dt_nascimento")
+                    ,rs.getString("nm_email")
             );
         }
         rs.close();
@@ -108,8 +116,8 @@ public class Aluno {
     }
 
     //Metodo para alterar aluno
-    public static void AlterarAluno (String nome,String sobrenome,String cpf,String rua,String bairro, int numero, String cidade,String estado, int cep, String telefone, String nomeres, String cpfres)throws Exception{
-        String SQL = "UPDATE aluno SET nm_nome = ? , nm_sobrenome = ? , nm_endereco_rua = ? , nm_endereco_bairro = ? , nm_endereco_num = ? , nm_cidade = ? , nm_estado = ? , cd_cep = ? , cd_telefone = ? , nm_responsavel = ? , cd_cpf_responsavel = ? WHERE cd_cpf = ? " ;
+    public static void AlterarAluno (String nome,String sobrenome,String cpf,String rua,String bairro, int numero, String cidade,String estado, int cep, String telefone, String nomeres, String cpfres, String email)throws Exception{
+        String SQL = "UPDATE aluno SET nm_nome = ? , nm_sobrenome = ? , nm_endereco_rua = ? , nm_endereco_bairro = ? , nm_endereco_num = ? , nm_cidade = ? , nm_estado = ? , cd_cep = ? , cd_telefone = ? , nm_responsavel = ? , cd_cpf_responsavel = ? , nm_email = ? WHERE cd_cpf = ? " ;
         PreparedStatement s = DataBase.getConnection().prepareStatement(SQL);
                     s.setString(1,nome);
                     s.setString(2,sobrenome);
@@ -122,12 +130,49 @@ public class Aluno {
                     s.setString(9,telefone);
                     s.setString(10,nomeres);
                     s.setString(11,cpfres);  
-                    s.setString(12,cpf);
+                    s.setString(12, email);
+                    s.setString(13,cpf);
                     s.execute();
                     s.close();
              
     }
-    public Aluno(String nome, String sobreNome, String cpf, String rua, String bairro, int numero, String cidade, String estado, int cep, String telefone, String nomeResponsavel, String cpfresponsavel, String senha) {
+    
+    //Metodo para listar alunos de determinada turma
+    public static ArrayList<Aluno>PesquisarAlunosTurma(int codTurm) throws Exception{
+        ArrayList<Aluno> list = new ArrayList<>();
+        String SQL = "SELECT * FROM aluno, turma, matricula "
+                + "WHERE aluno.cd_cpf = matricula.cd_cpf_aluno "
+                + "AND turma.cd_turma = matricula.cd_turma "
+                + "AND turma.cd_turma = ?";
+        PreparedStatement s = DataBase.getConnection().prepareStatement(SQL);
+        s.setInt(1,codTurm);
+        ResultSet rs = s.executeQuery();
+            while(rs.next()){
+            Aluno al = new Aluno(
+                     rs.getString("nm_nome")
+                    ,rs.getString("nm_sobrenome")
+                    ,rs.getString("cd_cpf")
+                    ,rs.getString("nm_endereco_rua")
+                    ,rs.getString("nm_endereco_bairro")
+                    ,rs.getInt("nm_endereco_num")
+                    ,rs.getString("nm_cidade")
+                    ,rs.getString("nm_estado")
+                    ,rs.getInt("cd_cep")
+                    ,rs.getString("cd_telefone")
+                    ,rs.getString("nm_responsavel")
+                    ,rs.getString("cd_cpf_responsavel")
+                    ,rs.getString("cd_senha")
+                    ,rs.getDate("dt_nascimento")
+                    ,rs.getString("nm_email")
+            );
+            list.add(al);
+        }
+        rs.close();
+        s.close();
+        return list;
+    }
+    
+    public Aluno(String nome, String sobreNome, String cpf, String rua, String bairro, int numero, String cidade, String estado, int cep, String telefone, String nomeResponsavel, String cpfresponsavel, String senha,Date dtNasc, String email) {
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.cpf = cpf;
@@ -141,6 +186,8 @@ public class Aluno {
         this.nomeResponsavel = nomeResponsavel;
         this.cpfresponsavel = cpfresponsavel;
         this.senha = senha;
+        this.dtNasc = dtNasc;
+        this.email = email;
     }
     
     
@@ -248,4 +295,21 @@ public class Aluno {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public Date getDtNasc() {
+        return dtNasc;
+    }
+
+    public void setDtNasc(Date dtNasc) {
+        this.dtNasc = dtNasc;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 }

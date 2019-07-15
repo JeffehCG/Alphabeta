@@ -1,0 +1,31 @@
+.top-menu-responsive{
+    display: none !important;
+}
+.top-menu{
+    display: flex !important;
+}
+@media (max-width: 800px){
+    .top-menu-responsive{
+        display: flex !important;
+    }
+    
+    .bars.icon{
+        font-size: 26px;
+    }
+    
+    .ui.icon.button.men{
+        padding: 4px;
+        padding-bottom: 6px !important;
+        /*padding-top: 2px !important;*/
+    }
+    
+    .right.menu.item{
+        display: flex;
+        justify-content: cente;
+        margin: auto;
+    }
+    
+    .top-menu{
+        display: none !important;
+    }
+}

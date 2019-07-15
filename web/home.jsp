@@ -1,25 +1,42 @@
-<%-- 
-    Document   : home
-    Created on : 19/04/2018, 19:12:03
-    Author     : User
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    if(session.getAttribute("me.cpf")==null){
+    if (session.getAttribute("me.cpf") == null) {
         response.sendRedirect(request.getContextPath());
-        
     }
-    %>
+%>
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <%@include file="/jspf/semantic.jsp"%>
+        <link rel="stylesheet" type="text/css" href="src/style/perfil-professor.css">
+        <link rel="stylesheet" type="text/css" href="src/Semantic-UI/dist/components/menu.css">
+        <title>Início</title>
+        <%@include file="jspf/favicon.jspf"%>
+        
     </head>
+
     <body>
-        <h1>Bem Vindo <%=session.getAttribute("me.nome")%></h1>
+        <%@include file="jspf/head.jsp"%>
+        <div class="ui main segment text center aligned container" style="margin-top: 90px;">
+            <!--<form><input type="submit" name="logoff" value="Encerrar Sessão"/></form>-->
+
+            <h1>Bem vindo <%=session.getAttribute("me.nome")%></h1>
+
+
+
+            <div/>
     </body>
-    <a href="perfilAluno.jsp">Perfil</a>
+
 </html>
+
+<%/*if (request.getParameter("logoff") != null) {
+        session.setAttribute("me.cpf", null);
+        session.setAttribute("me.nome", null);
+        session.setAttribute("me.nivel", null);
+        response.sendRedirect("login.jsp");
+
+}*/%>

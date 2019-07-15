@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 5, 2018, 5:46:32 PM
+    Author     : rodrigo
+*/
+
+.exe-cards{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
+}
+
+.keyWord{
+    max-width: 141px !important;
+    max-height:200px !important;
+    height: auto;
+    width: 200px;
+    margin: auto;
+}
+
+#result,
+#ans{
+    display: none;
+}
+
+.lblFile{
+    margin: 2px;
+    height: 120px;
+    font-size: 40px;
+    display: flex;
+    cursor: pointer;
+}
+
+.lblFile:hover{
+    background-color: rgba(240,240,240,0.7);
+}
+
+.lblFile i{
+    /*justify-content: center;*/
+    margin: auto !important;
+    line-height: 1;
+}
+
